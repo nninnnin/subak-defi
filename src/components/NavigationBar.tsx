@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 const NavigationBar = () => {
   return (
@@ -9,9 +10,9 @@ const NavigationBar = () => {
       <Title>Watermelon Swap</Title>
 
       <NavList>
-        <li>Swap</li>
-        <li>Pools</li>
-        <li>Mortgages</li>
+        <Link href="/swap">Swap</Link>
+        <Link href="/pools">Pools</Link>
+        <Link href="/mortgages">Mortgages</Link>
       </NavList>
 
       <Profile>
@@ -45,7 +46,7 @@ const NavList = styled.ul`
   list-style: none;
   display: flex;
 
-  & > li {
+  & > a {
     margin-right: 32px;
   }
 `;

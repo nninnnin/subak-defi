@@ -21,11 +21,9 @@ const Swap = () => {
 
 const Container = styled.div`
   position: fixed;
-  top: 50%;
+  top: calc(50% + 20px);
   left: 50%;
   transform: translate(-50%, -50%);
-
-  background-color: red;
 `;
 
 const TokenSelectors = styled.div`
