@@ -18,9 +18,9 @@ const Calculator = () => {
 
 export const Container = styled.div`
   background-color: #fff;
-  width: 100%;
+  width: 600px;
 
-  margin-top: 2em;
+  margin-top: 1em;
   border-radius: 20px;
 
   color: black;
