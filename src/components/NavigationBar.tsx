@@ -3,8 +3,13 @@
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { useAccount } from "wagmi";
 
 const NavigationBar = () => {
+  const { address } = useAccount();
+
+  console.log("주소", address);
+
   return (
     <Container>
       <Title>Watermelon Swap</Title>

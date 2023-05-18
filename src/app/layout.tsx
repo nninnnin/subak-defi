@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 import NavigationBar from "@/components/NavigationBar";
+import { WagmiConfig, configureChains, createConfig } from "wagmi";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,11 +16,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // const { publicClient } = configureChains();
+
+  // const config = createConfig({
+  //   publicClient,
+  // });
+
   return (
     <html lang="en">
       <body className={inter.className}>
+        {/* <WagmiConfig config={}> */}
         <NavigationBar />
         {children}
+        {/* </WagmiConfig> */}
       </body>
     </html>
   );
