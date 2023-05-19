@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 
 const NavigationBar = () => {
-  const { address } = useAccount();
+  // const { address } = useAccount();
 
-  console.log("주소", address);
+  // console.log("주소", address);
 
   return (
     <Container>
