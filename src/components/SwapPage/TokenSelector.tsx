@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { Token } from "@/models";
+import TokenItem from "./TokenItem";
+
 const TokenSelector = () => {
+  const [tokenList, setTokenList] = useState<Array<Token>>([]);
+  const [selectedTokens, setSelectedTokens] = useState({
+    wallet: "",
+    pool: "",
+  });
+
+  useEffect(() => {
+    (async function () {
+      const res = await fetch(
+        "https://gateway.ipfs.io/ipns/tokens.uniswap.org"
+      );
+
+      const {
+        tokens: tokenList,
+      }: {
+        tokens: Array<Token>;
+      } = await res.json();
+
+      setTokenList(tokenList);
+    })();
+  }, []);
+
   return (
     <Container>
-      <Graph />
-
       <TokenList>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam commodi
-        animi, voluptate adipisci ipsa totam doloremque quo, eius magni nostrum
-        maiores consequatur amet quasi quos nisi minus ex iure laborum corporis
-        recusandae eum! Impedit facilis officia omnis mollitia, dolore
-        asperiores esse, rerum quas adipisci debitis minima numquam possimus
-        natus qui?
+        {tokenList.map((token) => (
+          <TokenItem key={token.address} token={token} />
+        ))}
       </TokenList>
     </Container>
   );
@@ -23,17 +43,9 @@ const Container = styled.div`
   padding: 1em;
 `;
 
-const Graph = styled.div`
-  background-color: rgb(70, 22, 22, 0.8);
-
-  width: 100%;
-  min-height: 150px;
-
-  border-radius: 20px;
-`;
-
 const TokenList = styled.div`
-  margin-top: 1em;
+  max-height: 200px;
+  overflow: auto;
 `;
 
 export default TokenSelector;

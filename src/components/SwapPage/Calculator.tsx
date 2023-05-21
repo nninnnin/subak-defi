@@ -5,13 +5,8 @@ import styled from "styled-components";
 const Calculator = () => {
   return (
     <Container>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-      doloribus, omnis corporis quam accusamus minus vitae quos, beatae maiores
-      dolore voluptate porro commodi quidem tempore! Est reprehenderit
-      accusantium quibusdam quas dolores harum in ipsa obcaecati pariatur.
-      Voluptatibus, modi possimus beatae velit numquam blanditiis. Consequuntur
-      ipsum corrupti sequi, eveniet expedita dolores inventore sunt porro ex
-      minus blanditiis quod! Non error asperiores debitis id dolores accusantium
+      <Wallet>wallet</Wallet>
+      <Pool>pool</Pool>
     </Container>
   );
 };
@@ -25,6 +20,20 @@ export const Container = styled.div`
 
   color: black;
   padding: 1em;
+
+  display: flex;
+`;
+
+export const Wallet = styled.div`
+  background-color: blanchedalmond;
+  flex: 1;
+`;
+
+export const Pool = styled.div`
+  background-color: cyan;
+  flex: 1;
+
+  text-align: right;
 `;
 
 export default Calculator;
