@@ -21,7 +21,11 @@
     "react-dom": "18.2.0",
     "styled-components": "^6.0.0-rc.1",
     "typescript": "5.0.4",
+    "uuid": "^9.0.0",
     "viem": "^0.3.31",
     "wagmi": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/uuid": "^9.0.1"
   }
 }

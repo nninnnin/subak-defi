@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -23,7 +24,7 @@ const TokenSelector = () => {
         tokens: Array<Token>;
       } = await res.json();
 
-      setTokenList(tokenList);
+      setTokenList([...tokenList.map((token) => ({ id: uuid(), ...token }))]);
     })();
   }, []);
 
@@ -31,7 +32,7 @@ const TokenSelector = () => {
     <Container>
       <TokenList>
         {tokenList.map((token) => (
-          <TokenItem key={token.address} token={token} />
+          <TokenItem key={token.id} token={token} />
         ))}
       </TokenList>
     </Container>
