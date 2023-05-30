@@ -1,23 +1,46 @@
-"use client";
-
 import React from "react";
 import styled from "styled-components";
+import { v4 as uuid } from "uuid";
 
 import TokenSelector from "@/components/SwapPage/TokenSelector";
 import Calculator from "@/components/SwapPage/Calculator";
+import { Token } from "@/models";
+import { SWRConfig } from "swr";
 
-const Swap = () => {
+const Swap = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
   return (
-    <Container>
-      <TokenSelectors>
-        <TokenSelector />
-        <TokenSelector />
-      </TokenSelectors>
+    <SWRConfig value={{ fallback }}>
+      <Container>
+        <TokenSelectors>
+          <TokenSelector />
+          <TokenSelector />
+        </TokenSelectors>
 
-      <Calculator />
-    </Container>
+        <Calculator />
+      </Container>
+    </SWRConfig>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await fetch("https://gateway.ipfs.io/ipns/tokens.uniswap.org");
+
+  const {
+    tokens: tokenList,
+  }: {
+    tokens: Array<Token>;
+  } = await res.json();
+
+  return {
+    props: {
+      fallback: {
+        "https://gateway.ipfs.io/ipns/tokens.uniswap.org": [
+          ...tokenList.map((token) => ({ id: uuid(), ...token })),
+        ],
+      },
+    },
+  };
+}
 
 const Container = styled.div`
   position: fixed;

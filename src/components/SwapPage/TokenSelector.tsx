@@ -1,37 +1,26 @@
-import { v4 as uuid } from "uuid";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import useSWRImmutable from "swr/immutable";
 
 import { Token } from "@/models";
 import TokenItem from "./TokenItem";
+import fetcher from "../../utils/fetcher";
 
 const TokenSelector = () => {
-  const [tokenList, setTokenList] = useState<Array<Token>>([]);
+  const { data: tokenList } = useSWRImmutable(
+    "https://gateway.ipfs.io/ipns/tokens.uniswap.org",
+    fetcher
+  );
+
   const [selectedTokens, setSelectedTokens] = useState({
     wallet: "",
     pool: "",
   });
 
-  useEffect(() => {
-    (async function () {
-      const res = await fetch(
-        "https://gateway.ipfs.io/ipns/tokens.uniswap.org"
-      );
-
-      const {
-        tokens: tokenList,
-      }: {
-        tokens: Array<Token>;
-      } = await res.json();
-
-      setTokenList([...tokenList.map((token) => ({ id: uuid(), ...token }))]);
-    })();
-  }, []);
-
   return (
     <Container>
       <TokenList>
-        {tokenList.map((token) => (
+        {tokenList.map((token: Token) => (
           <TokenItem key={token.id} token={token} />
         ))}
       </TokenList>
