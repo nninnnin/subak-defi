@@ -10,7 +10,7 @@ const NavigationBar = () => {
 
   return (
     <Container>
-      <Title>Watermelon Swap</Title>
+      <Title role="heading">Watermelon Swap</Title>
 
       <NavList>
         <Link href="/swap">Swap</Link>
@@ -54,7 +54,7 @@ const NavList = styled.ul`
   }
 `;
 
-export const Title = styled.div``;
+export const Title = styled.header``;
 
 export const Profile = styled.div`
   display: flex;
