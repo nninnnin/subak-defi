@@ -58,9 +58,11 @@ const SwapTokenButton = styled.button`
   background-color: #fb5858;
   color: white;
 
+  margin-left: 8px;
   padding: 10px 12px;
   border-radius: 10px;
   font-weight: 700;
+  white-space: nowrap;
 
   &:disabled {
     background-color: gainsboro;

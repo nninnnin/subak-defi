@@ -2,6 +2,15 @@
   font-family: Helvetica;
 }
 
+input {
+  border: none;
+  outline: none;
+
+  font-size: 1em;
+  padding: 2px 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 button {
   outline: none;
   border: none;
