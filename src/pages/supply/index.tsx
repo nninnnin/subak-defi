@@ -7,6 +7,7 @@ import fetcher from "@/utils/fetcher";
 import { addUniqueIds, filterTokens } from "@/utils";
 import TokenSelector from "@/components/SwapPage/TokenSelector";
 import { Token } from "@/models";
+import Calculator from "@/components/SupplyPage/Calculator";
 
 const SupplyPage = ({
   fallback,
@@ -20,6 +21,8 @@ const SupplyPage = ({
           <TokenSelector selectorType="input" />
           <TokenSelector selectorType="output" />
         </TokenSelectors>
+
+        <Calculator />
       </Container>
     </SWRConfig>
   );

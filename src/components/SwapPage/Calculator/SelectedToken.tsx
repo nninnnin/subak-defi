@@ -33,6 +33,7 @@ const SelectedToken = ({ selectedToken }: { selectedToken: Token | null }) => {
         />
 
         <div
+          role="selected-token-input-container"
           className={css`
             background-color: ${hasSelected ? "" : "gainsboro"};
             flex: 1;

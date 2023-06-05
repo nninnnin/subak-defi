@@ -2,6 +2,8 @@
 
 ## Feature details
 
+### Swap (Exchange token) page
+
 - 지갑 연동
 
   - wagmi의 useAccount 등 유틸리티 훅을 이용하여 메타마스크와 연결
@@ -17,3 +19,5 @@
 
 - 교환할 토큰 양을 입력
   - validator 내부에서 정규식을 통해 숫자 또는 유틸리티 키가 아닌 것은 keyDown 시 이벤트 종료
+
+### Pools (Add liquidity) page

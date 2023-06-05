@@ -8,6 +8,7 @@ import {
   SelectedOutputTokenState,
 } from "@/pages/_app";
 import SelectedToken from "./SelectedToken";
+import Container from "@/components/common/CalculatorContainer";
 
 const Calculator = () => {
   const selectedInputToken = useRecoilValue(SelectedInputTokenState);
@@ -46,20 +47,6 @@ const Calculator = () => {
   );
 };
 
-const Container = styled.div`
-  background-color: #fff;
-  width: 600px;
-
-  margin-top: 1em;
-  border-radius: 20px;
-
-  color: black;
-  padding: 1em;
-
-  display: flex;
-  justify-content: space-between;
-`;
-
 const SwapTokenButton = styled.button`
   background-color: #fb5858;
   color: white;
@@ -72,6 +59,21 @@ const SwapTokenButton = styled.button`
 
   &:disabled {
     background-color: gainsboro;
+  }
+`;
+
+const SelectedTokenContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  & > img {
+    margin: 0 8px;
+  }
+
+  & > div {
+    flex: 1;
   }
 `;
 
