@@ -22,8 +22,9 @@ const NavigationBar = () => {
 
       <NavList>
         <Link href="/swap">Swap</Link>
-        <Link href="/pools">Pools</Link>
-        <Link href="/mortgages">Mortgages</Link>
+        <Link href="/supply">Supply</Link>
+        <Link href="/borrow">Borrow</Link>
+        <Link href="/dashboard">Dashboard</Link>
       </NavList>
 
       <Profile>
