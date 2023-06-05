@@ -7,6 +7,7 @@ import TokenSelector from "@/components/SwapPage/TokenSelector";
 import Calculator from "@/components/SwapPage/Calculator/Calculator";
 import { Token } from "@/models";
 import { addUniqueIds, filterTokens } from "@/utils";
+import fetcher from "@/utils/fetcher";
 
 const SwapPage = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
   return (
@@ -24,13 +25,9 @@ const SwapPage = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch("https://gateway.ipfs.io/ipns/tokens.uniswap.org");
-
-  const {
-    tokens: tokenList,
-  }: {
-    tokens: Array<Token>;
-  } = await res.json();
+  const { tokens: tokenList } = await fetcher(
+    "https://gateway.ipfs.io/ipns/tokens.uniswap.org"
+  );
 
   return {
     props: {
