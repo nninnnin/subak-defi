@@ -35,7 +35,7 @@ const SelectedToken = ({ selectedToken }: { selectedToken: Token | null }) => {
         <div
           className={css`
             background-color: ${hasSelected ? "" : "gainsboro"};
-            min-width: 50px;
+            flex: 1;
             height: 24px;
             display: flex;
             align-items: center;

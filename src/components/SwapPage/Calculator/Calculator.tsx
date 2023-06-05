@@ -20,11 +20,17 @@ const Calculator = () => {
     <Container>
       <div
         className={css`
+          width: 100%;
+
           display: flex;
           align-items: center;
 
           & > img {
             margin: 0 8px;
+          }
+
+          & > div {
+            flex: 1;
           }
         `}
       >
