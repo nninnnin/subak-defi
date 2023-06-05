@@ -11,9 +11,11 @@ import {
 const TokenItem = ({
   token,
   selectorType,
+  disabled,
 }: {
   token: Token;
   selectorType: "input" | "output";
+  disabled?: boolean;
 }) => {
   const [selectedToken, setSelectedToken] = useRecoilState(
     selectorType === "input"
@@ -27,18 +29,19 @@ const TokenItem = ({
 
   const isSelected = selectedToken?.id === token.id;
 
-  console.log(selectedToken);
-  console.log(token);
-
   return (
-    <Container onClick={handleTokenItemClick(token)} selected={isSelected}>
+    <Container
+      onClick={handleTokenItemClick(token)}
+      selected={isSelected}
+      disabled={disabled}
+    >
       <Logo src={token.logoURI} width={24} height={24} />
       <Name>{token.name}</Name>
     </Container>
   );
 };
 
-export const Container = styled.div<{ selected: boolean }>`
+export const Container = styled.div<{ selected: boolean; disabled?: boolean }>`
   display: flex;
   align-items: center;
 
@@ -48,6 +51,8 @@ export const Container = styled.div<{ selected: boolean }>`
 
   border-radius: 8px;
   cursor: pointer;
+
+  transition: 0.2s;
 
   &:hover {
     color: white;
@@ -61,6 +66,13 @@ export const Container = styled.div<{ selected: boolean }>`
       background-color: #ff9e9e;
   `
       : ""};
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+    background-color: #ededed;
+    pointer-events: none;
+  `};
 `;
 
 export const Logo = styled.img`

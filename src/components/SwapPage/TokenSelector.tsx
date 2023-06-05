@@ -5,6 +5,11 @@ import useSWRImmutable from "swr/immutable";
 import { Token } from "@/models";
 import TokenItem from "./TokenItem";
 import fetcher from "../../utils/fetcher";
+import {
+  SelectedInputTokenState,
+  SelectedOutputTokenState,
+} from "@/pages/_app";
+import { useRecoilValue } from "recoil";
 
 interface Props {
   selectorType: "input" | "output";
@@ -16,12 +21,27 @@ const TokenSelector = ({ selectorType }: Props) => {
     fetcher
   );
 
+  const selectedToken = useRecoilValue(
+    selectorType === "input"
+      ? SelectedOutputTokenState
+      : SelectedInputTokenState
+  );
+
   return (
     <Container>
       <TokenList>
-        {tokenList.map((token: Token) => (
-          <TokenItem key={token.id} token={token} selectorType={selectorType} />
-        ))}
+        {tokenList.map((token: Token) => {
+          const isAlreadySelected = selectedToken?.id === token.id;
+
+          return (
+            <TokenItem
+              key={token.id}
+              token={token}
+              selectorType={selectorType}
+              disabled={isAlreadySelected}
+            />
+          );
+        })}
       </TokenList>
     </Container>
   );
