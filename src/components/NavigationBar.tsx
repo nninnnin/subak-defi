@@ -1,12 +1,20 @@
-import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
+import { css } from "@emotion/css";
+import { InjectedConnector } from "@wagmi/core";
+import { formatAddress } from "../utils";
 
 const NavigationBar = () => {
-  // const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
-  // console.log("주소", address);
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+
+  const handleLoginButtonClick = () => {
+    connect();
+  };
 
   return (
     <Container>
@@ -19,8 +27,21 @@ const NavigationBar = () => {
       </NavList>
 
       <Profile>
-        <ProfileImage />
-        <Address>0xda...6873</Address>
+        {isConnected ? (
+          <>
+            <ProfileImage />
+            <Address>{formatAddress(address!)}</Address>
+          </>
+        ) : (
+          <button
+            className={css`
+              padding: 6px 12px;
+            `}
+            onClick={handleLoginButtonClick}
+          >
+            로그인
+          </button>
+        )}
       </Profile>
     </Container>
   );

@@ -4,6 +4,8 @@ import { RecoilRoot, atom } from "recoil";
 import { Token } from "@/models";
 
 import NavigationBar from "../components/NavigationBar";
+import { WagmiConfig, createConfig, mainnet } from "wagmi";
+import { createPublicClient, http } from "viem";
 
 export const SelectedInputTokenState = atom<Token | null>({
   key: "SelectedInputTokenState",
@@ -16,10 +18,20 @@ export const SelectedOutputTokenState = atom<Token | null>({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const config = createConfig({
+    autoConnect: true,
+    publicClient: createPublicClient({
+      chain: mainnet,
+      transport: http(),
+    }),
+  });
+
   return (
-    <RecoilRoot>
-      <NavigationBar />
-      <Component {...pageProps} />
-    </RecoilRoot>
+    <WagmiConfig config={config}>
+      <RecoilRoot>
+        <NavigationBar />
+        <Component {...pageProps} />
+      </RecoilRoot>
+    </WagmiConfig>
   );
 }

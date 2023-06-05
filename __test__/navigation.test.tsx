@@ -1,4 +1,3 @@
-import TestRenderer from "react-test-renderer";
 import { screen, render } from "@testing-library/react";
 import NavigationBar from "@/components/NavigationBar";
 
