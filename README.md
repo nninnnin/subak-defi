@@ -1,5 +1,7 @@
 # Subak defi
 
+## Feature details
+
 - 지갑 연동
 
   - wagmi의 useAccount 등 유틸리티 훅을 이용하여 메타마스크와 연결
