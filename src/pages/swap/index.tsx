@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import { SWRConfig } from "swr";
 
 import TokenSelector from "@/components/SwapPage/TokenSelector";
-import Calculator from "@/components/SwapPage/Calculator";
+import Calculator from "@/components/SwapPage/Calculator/Calculator";
 import { Token } from "@/models";
 
 const Swap = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
