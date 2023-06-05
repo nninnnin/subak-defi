@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { v4 as uuid } from "uuid";
 import { SWRConfig } from "swr";
 
 import Layout from "@/components/Layout";
 import TokenSelector from "@/components/SwapPage/TokenSelector";
 import Calculator from "@/components/SwapPage/Calculator/Calculator";
 import { Token } from "@/models";
+import { addUniqueIds, filterTokens } from "@/utils";
 
 const SwapPage = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
   return (
@@ -32,18 +32,11 @@ export async function getServerSideProps() {
     tokens: Array<Token>;
   } = await res.json();
 
-  const allowedTokens = ["USDC", "USDT", "WBTC", "DAI", "WETH"];
-
   return {
     props: {
       fallback: {
         "https://gateway.ipfs.io/ipns/tokens.uniswap.org": [
-          ...tokenList
-            .filter(
-              (token) =>
-                allowedTokens.includes(token.symbol) && token.chainId === 1
-            )
-            .map((token) => ({ id: uuid(), ...token })),
+          ...addUniqueIds(filterTokens(tokenList)),
         ],
       },
     },
