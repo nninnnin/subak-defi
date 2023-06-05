@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { v4 as uuid } from "uuid";
 import { SWRConfig } from "swr";
 
+import Layout from "@/components/Layout";
 import TokenSelector from "@/components/SwapPage/TokenSelector";
 import Calculator from "@/components/SwapPage/Calculator/Calculator";
 import { Token } from "@/models";
 
-const Swap = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
+const SwapPage = ({ fallback }: { fallback: { tokenList: Array<Token> } }) => {
   return (
     <SWRConfig value={{ fallback }}>
       <Container>
@@ -75,4 +76,8 @@ const TokenSelectors = styled.div`
   }
 `;
 
-export default Swap;
+export default SwapPage;
+
+SwapPage.getLayout = function (page: React.ReactNode) {
+  return <Layout>{page}</Layout>;
+};

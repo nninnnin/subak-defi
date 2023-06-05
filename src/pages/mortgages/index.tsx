@@ -1,7 +1,7 @@
-"use client";
-
 import React from "react";
 import styled from "styled-components";
+
+import Layout from "@/components/Layout";
 
 const Mortgage = () => {
   return <Container>Mortgages</Container>;
@@ -18,3 +18,7 @@ const Container = styled.div`
 `;
 
 export default Mortgage;
+
+Mortgage.getLayout = function (page: React.ReactNode) {
+  return <Layout>{page}</Layout>;
+};

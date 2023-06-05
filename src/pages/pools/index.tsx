@@ -1,10 +1,10 @@
-"use client";
-
 import React from "react";
 import styled from "styled-components";
 
-const Pools = () => {
-  return <Container>Pools</Container>;
+import Layout from "@/components/Layout";
+
+const PoolsPage = () => {
+  return <Container>PoolsPage</Container>;
 };
 
 const Container = styled.div`
@@ -17,4 +17,8 @@ const Container = styled.div`
   font-weight: bold;
 `;
 
-export default Pools;
+export default PoolsPage;
+
+PoolsPage.getLayout = function (page: React.ReactNode) {
+  return <Layout>{page}</Layout>;
+};

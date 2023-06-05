@@ -1,11 +1,12 @@
-import "./globals.css";
+import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { RecoilRoot, atom } from "recoil";
-import { Token } from "@/models";
-
-import NavigationBar from "../components/NavigationBar";
 import { WagmiConfig, createConfig, mainnet } from "wagmi";
 import { createPublicClient, http } from "viem";
+
+import { Token } from "@/models";
+import "./globals.css";
+import { ReactElement } from "react";
 
 export const SelectedInputTokenState = atom<Token | null>({
   key: "SelectedInputTokenState",
@@ -17,7 +18,15 @@ export const SelectedOutputTokenState = atom<Token | null>({
   default: null,
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => React.ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const config = createConfig({
     autoConnect: true,
     publicClient: createPublicClient({
@@ -26,12 +35,11 @@ export default function App({ Component, pageProps }: AppProps) {
     }),
   });
 
+  const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
+
   return (
     <WagmiConfig config={config}>
-      <RecoilRoot>
-        <NavigationBar />
-        <Component {...pageProps} />
-      </RecoilRoot>
+      <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>
     </WagmiConfig>
   );
 }
