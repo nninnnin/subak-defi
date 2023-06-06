@@ -26,3 +26,6 @@
   - validator 내부에서 정규식을 통해 숫자 또는 유틸리티 키가 아닌 것은 keyDown 시 이벤트 종료
 
 ### Pools (Add liquidity) page
+
+- P5.js 연동
+  - react-p5-wrapper를 사용했으나 [모듈관련 에러 발생](https://github.com/P5-wrapper/react/issues/230)으로 해당 패키지 작성자가 새롭게 만든(..) [Next.js 를 위한 wrapper 패키지](https://github.com/P5-wrapper/next)를 사용
