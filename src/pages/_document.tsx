@@ -1,7 +1,6 @@
 import Document, { DocumentContext, DocumentInitialProps } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import { extractCritical } from "@emotion/server";
-import { renderToString } from "react-dom/server";
+import { renderStatic } from "../shared/renderer";
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -11,28 +10,28 @@ export default class MyDocument extends Document {
     const originalRenderPage = ctx.renderPage;
 
     try {
-      let emotionStyles;
-
-      ctx.renderPage = () => {
-        const out = originalRenderPage({
+      ctx.renderPage = async () => {
+        const out = await originalRenderPage({
           enhanceApp: (App) => (props) => {
             return sheet.collectStyles(<App {...props} />);
           },
         });
 
-        emotionStyles = extractCritical(out.html).css;
-
         return out;
       };
 
       const initialProps = await Document.getInitialProps(ctx);
+      const { css, ids } = await renderStatic(initialProps.html);
 
       return {
         ...initialProps,
         styles: (
           <>
             {initialProps.styles}
-            <style>{emotionStyles}</style>
+            <style
+              data-emotion={`css ${ids.join(" ")}`}
+              dangerouslySetInnerHTML={{ __html: css }}
+            />
             {sheet.getStyleElement()}
           </>
         ),
