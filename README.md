@@ -2,6 +2,11 @@
 
 ## Feature details
 
+### Common
+
+- styled-components 와 emotion을 사용하여 스타일링
+  - 두 라이브러리 모두 SSR이 적용되도록 세팅, 이모션의 경우 Next.js 공식 레포지토리의 example 참고하였음
+
 ### Swap (Exchange token) page
 
 - 지갑 연동
