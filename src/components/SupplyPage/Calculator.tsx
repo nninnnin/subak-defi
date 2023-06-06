@@ -13,35 +13,38 @@ const Calculator = () => {
         className={css`
           border-right: 1px solid gainsboro;
           flex: 1;
+          min-height: 200px;
         `}
         ref={(ref) => (containerRef.current = ref)}
       >
         <NextReactP5Wrapper
           sketch={(p5) => {
-            p5.setup = () =>
-              p5.createCanvas(
-                containerRef.current?.offsetWidth,
-                containerRef.current?.offsetHeight,
-                p5.WEBGL
-              );
+            const { offsetWidth, offsetHeight } = containerRef.current!;
+
+            p5.setup = () => {
+              p5.createCanvas(offsetWidth, offsetHeight, p5.WEBGL);
+            };
+
+            function drawRect(x = 0, y = 0) {
+              p5.push();
+              p5.fill(255, 158, 158);
+              p5.noStroke();
+              p5.beginShape();
+              p5.vertex(x + 0, y + 35); // 위
+              p5.vertex(x + 35, y + 0); // 오른쪽
+              p5.vertex(x + 0, y + -35); // 아래
+              p5.vertex(x + -35, y + 0); // 왼쪽
+              p5.endShape();
+              p5.pop();
+            }
 
             p5.draw = () => {
-              p5.background(255, 204, 0);
+              p5.rectMode(p5.CORNERS);
+              p5.background(210, 210, 310);
               p5.normalMaterial();
 
-              p5.push();
-              p5.rotateZ(p5.frameCount * 0.01);
-              p5.rotateX(p5.frameCount * 0.01);
-              p5.rotateY(p5.frameCount * 0.01);
-              p5.plane(50);
-              p5.pop();
-
-              p5.push();
-              p5.rotateZ(p5.frameCount * 0.02);
-              p5.rotateX(p5.frameCount * 0.03);
-              p5.rotateY(p5.frameCount * 0.04);
-              p5.quad(38, 31, 86, 20, 69, 63, 30, 76);
-              p5.pop();
+              drawRect(-50);
+              drawRect(50, 0);
             };
           }}
         />
